@@ -1,0 +1,29 @@
+{
+  "name": "finding-waves-api",
+  "version": "1.0.0",
+  "description": "Finding Waves is an application to calculate the best surf condition between different beaches",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node.js",
+    "typescript",
+    "api",
+    "surf",
+    "waves",
+    "forecast"
+  ],
+  "author": "Jardel Gonçalves",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/module-alias": "^2.0.0",
+    "@types/node": "^14.0.27",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "module-alias": "^2.2.2"
+  }
+}
