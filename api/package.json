@@ -23,6 +23,7 @@
   "author": "Jardel Gonçalves",
   "license": "ISC",
   "devDependencies": {
+    "@types/express": "^4.17.7",
     "@types/jest": "^26.0.10",
     "@types/module-alias": "^2.0.0",
     "@types/node": "^14.0.27",
@@ -37,6 +38,8 @@
     "typescript": "^3.9.7"
   },
   "dependencies": {
+    "@overnightjs/core": "^1.7.4",
+    "express": "^4.17.1",
     "module-alias": "^2.2.2"
   }
 }
