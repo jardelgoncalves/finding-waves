@@ -90,9 +90,9 @@ describe('Forecast Service', () => {
     expect(beachesWithRaiting).toEqual(expectedResponse);
   });
 
-  it('should return an empty list when the beaches is empty', () => {
+  it('should return an empty list when the beaches is empty', async () => {
     const forecast = new Forecast();
-    const response = forecast.proccessForecastForBeaches([]);
+    const response = await forecast.proccessForecastForBeaches([]);
 
     expect(response).toEqual([]);
   });
