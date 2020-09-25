@@ -10,7 +10,7 @@ describe('Beaches funtional tests', () => {
 
       const response = await global.testRequest.post('/beaches').send(newBeach);
       expect(response.status).toEqual(201);
-      expect(response.body).toEqual(newBeach);
+      expect(response.body).toEqual(expect.objectContaining(newBeach));
     });
   });
 });
