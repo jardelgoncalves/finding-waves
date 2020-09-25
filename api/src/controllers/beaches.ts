@@ -4,6 +4,6 @@ import { Request, Response } from 'express';
 export class BeachesController {
   @Post('')
   public async creare(req: Request, res: Response): Promise<void> {
-    res.status(201).send(req.body);
+    res.status(201).send({ ...req.body, _id: 'fake-id' });
   }
 }
