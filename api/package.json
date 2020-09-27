@@ -10,6 +10,7 @@
     "lint": "eslint ./src --ext .ts",
     "lint:fix": "eslint ./src --ext .ts --fix",
     "style:check": "prettier --check './src/**/*.ts' './test/**/*.ts'",
+    "test": "npm run test:e2e && npm run test:unit",
     "test:e2e": "jest --projects ./test --runInBand",
     "test:unit": "jest"
   },
