@@ -1,4 +1,5 @@
 import { Response } from 'express';
+import { CUSTOM_VALIDATION } from '@src/models/user';
 import mongoose from 'mongoose';
 
 export abstract class BaseController {
@@ -7,7 +8,13 @@ export abstract class BaseController {
     error: mongoose.Error.ValidationError | Error
   ): void {
     if (error instanceof mongoose.Error.ValidationError) {
-      res.status(422).send({ code: 422, error: error.message });
+      const duplicatedKinErrors = Object.values(error.errors).filter(
+        (err) => err.kind === CUSTOM_VALIDATION.DUPLICATED
+      );
+      let code = 422;
+      if (duplicatedKinErrors.length) code = 409;
+
+      res.status(code).send({ code, error: error.message });
       return;
     }
     res.status(500).send({ code: 500, error: 'Something went wrang!' });
