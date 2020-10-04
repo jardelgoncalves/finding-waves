@@ -2,19 +2,29 @@ import { Beach, BeachPosition } from '@src/models/beach';
 import nock from 'nock';
 import stormGlass3HoursFixture from '@test/fixtures/stormglass_weather_3_hours.json';
 import apiForecastResponse1BeachFixture from '@test/fixtures/api_forecast_response_1_beach.json';
+import { User } from '@src/models/user';
+import { AuthService } from '@src/services/auth';
 
 describe('Beach forecast functional test', () => {
-  beforeAll(async () => {
-    await Beach.deleteMany({});
-    const defaultBeach = {
-      lat: -33.792726,
-      lng: 151.289824,
-      name: 'Manly',
-      position: BeachPosition.E,
-    };
+  const defaultBeach = {
+    lat: -33.792726,
+    lng: 151.289824,
+    name: 'Manly',
+    position: BeachPosition.E,
+  };
+  let token: string;
+  const defaultUser = {
+    name: 'John Doe',
+    email: 'john@email.com',
+    password: '1234',
+  };
 
-    const beach = new Beach(defaultBeach);
-    await beach.save();
+  beforeEach(async () => {
+    await Beach.deleteMany({});
+    await User.deleteMany({});
+    const user = await new User(defaultUser).save();
+    await new Beach({ ...defaultBeach, ...{ user: user.id } }).save();
+    token = AuthService.generateToken(user.toJSON());
   });
   it('should return a forecast with just a few times', async () => {
     nock('https://api.stormglass.io:443', {
@@ -33,7 +43,9 @@ describe('Beach forecast functional test', () => {
       })
       .reply(200, stormGlass3HoursFixture);
 
-    const { body, status } = await global.testRequest.get('/forecast');
+    const { body, status } = await global.testRequest
+      .get('/forecast')
+      .set({ 'x-access-token': token });
     expect(status).toBe(200);
     expect(body).toEqual(apiForecastResponse1BeachFixture);
   });
@@ -53,7 +65,9 @@ describe('Beach forecast functional test', () => {
       })
       .replyWithError('Somthing went wrong');
 
-    const { status } = await global.testRequest.get('/forecast');
+    const { status } = await global.testRequest
+      .get('/forecast')
+      .set({ 'x-access-token': token });
     expect(status).toBe(500);
   });
 });
