@@ -42,7 +42,7 @@ export class SetupServer extends Server {
   }
 
   public start(): void {
-    this.app.listen(this.port, () => {
+    this.app.listen(process.env.PORT || this.port, () => {
       console.info('Server listening of port:', process.env.PORT || this.port);
     });
   }
