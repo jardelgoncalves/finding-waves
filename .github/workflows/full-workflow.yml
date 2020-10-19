@@ -38,7 +38,7 @@ jobs:
 
     - name: Deploy on Heroku
       if: github.ref == 'refs/heads/master'
-      uses: akhileshns/heroku-deploy@v3.5.7 # This is the action
+      uses: akhileshns/heroku-deploy@v3.5.7
       with:
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
         heroku_app_name: "finding-waves"
