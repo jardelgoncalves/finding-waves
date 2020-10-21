@@ -7,6 +7,13 @@ enum ExitStatus {
   Success = 0,
 }
 
+process.on('unhandledRejection', (reason, promise) => {
+  logger.error(
+    `App exiting due to an unhandled promise ${promise} and reasons ${reason}`
+  );
+  throw reason;
+});
+
 (async () => {
   try {
     const server = new SetupServer(config.get('App.port'));
