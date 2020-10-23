@@ -2,6 +2,7 @@ import { Response } from 'express';
 import { CUSTOM_VALIDATION } from '@src/models/user';
 import mongoose from 'mongoose';
 import logger from '@src/logger';
+import ApiError, { APIError } from '@src/util/error/api-error';
 
 export abstract class BaseController {
   protected sendCreateOrUpdateResponseError(
@@ -10,11 +11,18 @@ export abstract class BaseController {
   ): void {
     if (error instanceof mongoose.Error.ValidationError) {
       const clientError = this.handlerClientError(error);
-      res.status(clientError.code).send(clientError);
+      res.status(clientError.code).send(
+        ApiError.format({
+          code: clientError.code,
+          message: clientError.error,
+        })
+      );
       return;
     }
     logger.error(error);
-    res.status(500).send({ code: 500, error: 'Something went wrang!' });
+    res
+      .status(500)
+      .send(ApiError.format({ code: 500, message: 'Something went wrang!' }));
   }
 
   private handlerClientError(
@@ -27,5 +35,9 @@ export abstract class BaseController {
     if (duplicatedKinErrors.length) code = 409;
 
     return { code, error: error.message };
+  }
+
+  protected sendErrorResponse(res: Response, apiError: APIError): Response {
+    return res.status(apiError.code).send(ApiError.format(apiError));
   }
 }
