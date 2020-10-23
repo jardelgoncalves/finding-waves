@@ -16,7 +16,10 @@ export class BeachesController extends BaseController {
       res.status(201).send(result);
     } catch (error) {
       if (error instanceof mongoose.Error.ValidationError) {
-        res.status(422).send({ error: error.message });
+        this.sendErrorResponse(res, {
+          code: 422,
+          message: error.message,
+        });
         return;
       }
       this.sendCreateOrUpdateResponseError(res, error);
