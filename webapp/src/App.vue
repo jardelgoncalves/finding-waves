@@ -1,28 +1,45 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <app-button text="Login" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { Button } from './components'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    'app-button': Button
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss">
+:root {
+  --text-color-dark: #3C3C3C;
+  --color-primary: #6C38D3;
+  --color-secondary: #FAD53B;
+  --color-gray: #848484;
+  --color-light: #E7E7E7;
+  --bg-input: rgba(0, 0, 0, 0.1);
+  --color-placeholder: rgb(250, 213, 59, 0.7);
 }
-</style>
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+body,
+input,
+select,
+button,
+a {
+  font-family: 'Nunito', sans-serif;
+}
+</style>>
