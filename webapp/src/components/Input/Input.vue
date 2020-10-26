@@ -3,13 +3,20 @@ export default {
   name: 'app-input',
   props: {
     name: { type: String },
+    placeholder: { type: String },
     value: { type: String }
   }
 }
 </script>
 
 <template>
-  <input class="input" :name="name" :value="value" @change="$emit('change')" />
+  <input
+    class="input"
+    :name="name"
+    :value="value"
+    :placeholder="placeholder"
+    @change="$emit('change')"
+  />
 </template>
 <style lang="scss" scoped>
 .input {
