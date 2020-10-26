@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <app-button text="Login" />
+    <app-avatar text="Jardel" />
   </div>
 </template>
 
 <script>
-import { Button } from './components'
+import { Avatar } from './components'
 
 export default {
   name: 'App',
   components: {
-    'app-button': Button
+    'app-avatar': Avatar
   }
 }
 </script>
