@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <app-avatar text="Jardel" />
+    <app-beach-card name="Manly" />
   </div>
 </template>
 
 <script>
-import { Avatar } from './components'
+import { BeachCard } from './components'
 
 export default {
   name: 'App',
   components: {
-    'app-avatar': Avatar
+    'app-beach-card': BeachCard
   }
 }
 </script>
@@ -22,6 +22,7 @@ export default {
   --color-secondary: #FAD53B;
   --color-gray: #848484;
   --color-light: #E7E7E7;
+  --color-white: #ffffff;
   --bg-input: rgba(0, 0, 0, 0.1);
   --color-placeholder: rgb(250, 213, 59, 0.7);
 }
