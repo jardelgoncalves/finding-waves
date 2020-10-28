@@ -24,7 +24,7 @@ export default {
 }
 </script>
 <template>
-  <div class="beach-card">
+  <div class="beach-card" @click="$emit('click')">
     <div class="beach-card__title">
       <span class="beach-card__title__beach">Beach</span>
       <span class="beach-card__title__name">{{ name }}</span>
@@ -65,13 +65,15 @@ export default {
 
 <style lang="scss">
 .beach-card {
-  max-width: 320px;
+  min-width: 320px;
   height: 160px;
   background-color: var(--color-white);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
   border-radius: 16px;
   transition: box-shadow 0.2s;
   padding: 16px;
+  user-select: none;
+  margin: 12px;
 
   &:hover {
     cursor: pointer;
