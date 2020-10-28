@@ -1,22 +1,53 @@
 <template>
   <div id="app">
-    <app-beach-card
-      name="Manly"
-      swell="0.71m 9.41s"
-      wave="1.21m"
-      :rating="2"
-    />
+    <app-scroll-horizontal>
+      <app-beach-card
+        name="Manly"
+        swell="0.71m 9.41s"
+        wave="1.21m"
+        :rating="2"
+        @click="click"
+      />
+
+      <app-beach-card
+        name="Manly"
+        swell="0.71m 9.41s"
+        wave="1.21m"
+        :rating="2"
+      />
+
+      <app-beach-card
+        name="Manly"
+        swell="0.71m 9.41s"
+        wave="1.21m"
+        :rating="2"
+      />
+
+      <app-beach-card
+        name="Manly"
+        swell="0.71m 9.41s"
+        wave="1.21m"
+        :rating="2"
+      />
+
+    </app-scroll-horizontal>
   </div>
 </template>
 
 <script>
-import { BeachCard } from './components'
+import { ScrollHorizontal, BeachCard } from './components'
 
 export default {
   name: 'App',
   components: {
-    'app-beach-card': BeachCard
-  }
+    'app-beach-card': BeachCard,
+    'app-scroll-horizontal': ScrollHorizontal,
+  },
+  methods: {
+    click() {
+      alert('Helo')
+    }
+  },
 }
 </script>
 
