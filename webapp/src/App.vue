@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <app-beach-card name="Manly" />
+    <app-beach-card
+      name="Manly"
+      swell="0.71m 9.41s"
+      wave="1.21m"
+      :rating="2"
+    />
   </div>
 </template>
 
