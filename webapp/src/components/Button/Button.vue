@@ -2,14 +2,40 @@
 export default {
   name: 'app-button',
   props: {
-    text: { type: String, required: true },
-    loading: { type: Boolean },
-    block: { type: Boolean },
+    text: {
+      type: String,
+      required: true
+    },
+    loading: {
+      type: Boolean,
+      required: false
+    },
+    block: {
+      type: Boolean,
+      required: false
+    },
+    margin: {
+      type: String,
+      required: false,
+      validator: function(value) {
+        return value && value.split(' ').every(item => ['top', 'bottom', 'left', 'right'].includes(item))
+      }
+    },
+    marginSize: {
+      type: Number,
+      required: false,
+      default: () => 16
+    }
   },
   computed: {
     styles() {
+      const margins = this.margin ? this.margin.split(' ') : []
       return {
-        ...(this.block && { width: '100%' })
+        ...(this.block && { width: '100%' }),
+       ...margins.reduce((acc, orientation) => {
+          const name = `margin-${orientation}`;
+          return {...acc, [name]: `${this.marginSize}px`}
+        }, {})
       }
     },
     isLoading() {
