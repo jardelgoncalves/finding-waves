@@ -28,5 +28,3 @@ export default {
   </svg>
 </template>
 
-<style lang="scss" scoped>
-</style>
