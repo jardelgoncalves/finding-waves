@@ -19,6 +19,10 @@ export default {
       type: String,
       required: false,
     },
+    error: {
+      type: String,
+      required: false,
+    },
     margin: {
       type: String,
       required: false,
@@ -30,6 +34,11 @@ export default {
       type: Number,
       required: false,
       default: () => 16
+    },
+  },
+  methods: {
+    onChange(e) {
+      this.$emit('input', e)
     }
   },
   computed: {
@@ -47,37 +56,61 @@ export default {
 </script>
 
 <template>
+<div class="input" :style="styles">
   <input
-    :style="styles"
     :type="type"
-    class="input"
+    class="input__element"
     :name="name"
     :value="value"
     :placeholder="placeholder"
-    @change="$emit('change')"
+    @input="onChange"
   />
+  <div
+    :class="`input__error ${error && '--visible'}`"
+  >
+    {{ error }}
+  </div>
+</div>
 </template>
 <style lang="scss" scoped>
 .input {
-  width: 100%;
-  height: 50px;
-  border: none;
-  border-radius: 12px;
-  padding: 0 12px;
   display: flex;
-  align-items: center;
-  background-color: var(--bg-input);
-  color: var(--color-secondary);
-  font-weight: bold;
-  font-size: 18px;
-  outline: none;
-  &::placeholder {
-    color: var(--color-placeholder);
-    font-weight: 400;
-    font-size: 16px;
-  }
-  :focus {
+  flex-direction: column;
+  width: 100%;
+
+  &__element {
+    width: 100%;
+    height: 50px;
     border: none;
+    border-radius: 12px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-input);
+    color: var(--color-secondary);
+    font-weight: bold;
+    font-size: 18px;
+    outline: none;
+    &::placeholder {
+      color: var(--color-placeholder);
+      font-weight: 400;
+      font-size: 16px;
+    }
+    :focus {
+      border: none;
+    }
+  }
+
+
+  &__error {
+    opacity: 0;
+    color: #f87979;
+    padding: 4px;
+    transition: opacity 0.4s;
+
+    &.--visible {
+      opacity: 1;
+    }
   }
 }
 </style>
