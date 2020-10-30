@@ -1,4 +1,5 @@
 export * from './Input';
+export * from './Form';
 export * from './Button';
 export * from './Avatar';
 export * from './BeachCard';
