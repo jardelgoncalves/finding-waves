@@ -6,6 +6,14 @@ export default {
       type: String,
       required: true
     },
+    type: {
+      type: String,
+      required: false,
+      default: () => 'button',
+      validator: function(value) {
+        return ['button', 'submit', 'reset'].includes(value)
+      }
+    },
     loading: {
       type: Boolean,
       required: false
