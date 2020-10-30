@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <login-page />
+    <register-page />
   </div>
 </template>
 
 <script>
-import Login from './pages/Login'
+import Register from './pages/Register'
 
 export default {
   name: 'App',
   components: {
-    'login-page': Login,
+    'register-page': Register,
   },
   methods: {
     click() {
