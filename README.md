@@ -2,7 +2,7 @@
 
 Project created during the course from zero to production: learn how to build a Node.js API with Typescript presented by [Waldemar Neto](https://github.com/waldemarnt)
 
-[![Actions Status](https://github.com/jardelgoncalves/finding-waves/workflows/Complete%20workflow/badge.svg)](https://github.com/jardelgoncalves/inding-waves/actions)
+[![Actions Status](https://github.com/jardelgoncalves/finding-waves/workflows/Complete%20workflow/badge.svg)](https://github.com/jardelgoncalves/finding-waves/actions)
 
 ## Screenshot
 
