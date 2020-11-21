@@ -28,13 +28,13 @@ export default {
 
 <style lang="scss">
 .avatar {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: bold;
 }
 </style>
