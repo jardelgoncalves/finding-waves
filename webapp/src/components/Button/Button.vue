@@ -14,6 +14,16 @@ export default {
         return ['button', 'submit', 'reset'].includes(value)
       }
     },
+    width: {
+      type: Number,
+      required: false,
+      default: () => 250,
+    },
+    height: {
+      type: Number,
+      required: false,
+      default: () => 50,
+    },
     loading: {
       type: Boolean,
       required: false
@@ -39,8 +49,10 @@ export default {
     styles() {
       const margins = this.margin ? this.margin.split(' ') : []
       return {
+        width: `${this.width}px`,
+        height: `${this.height}px`,
         ...(this.block && { width: '100%' }),
-       ...margins.reduce((acc, orientation) => {
+        ...margins.reduce((acc, orientation) => {
           const name = `margin-${orientation}`;
           return {...acc, [name]: `${this.marginSize}px`}
         }, {})
@@ -71,7 +83,6 @@ export default {
 <style lang="scss">
 .button {
   height: 50px;
-  width: 250px;
   display: flex;
   align-items: center;
   justify-content: center;
