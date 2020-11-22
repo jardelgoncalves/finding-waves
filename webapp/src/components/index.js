@@ -6,3 +6,4 @@ export * from './BeachCard';
 export * from './ScrollHorizontal';
 export * from './Icon';
 export * from './SelectButton';
+export * from './TimeSelection';
