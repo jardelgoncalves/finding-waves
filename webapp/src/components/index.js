@@ -7,3 +7,4 @@ export * from './ScrollHorizontal';
 export * from './Icon';
 export * from './SelectButton';
 export * from './TimeSelection';
+export * from './Maps';
