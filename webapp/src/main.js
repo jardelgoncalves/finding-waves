@@ -1,9 +1,12 @@
 import Vue from 'vue'
-import App from './App.vue'
-import * as VueGoogleMaps from "vue2-google-maps"
 import Axios from 'axios'
+import Vuex from 'vuex'
+import * as VueGoogleMaps from "vue2-google-maps"
+import App from './App.vue'
 import router from './router'
 import { TOKEN } from'./utils/constants'
+
+Vue.use(Vuex)
 
 Vue.use(VueGoogleMaps, {
   load: {
