@@ -1,22 +1,13 @@
 <template>
   <div id="app">
-    <dashboard-page />
+    <router-view />
   </div>
 </template>
 
 <script>
-import Dashboard from './pages/Dashboard'
 
 export default {
   name: 'App',
-  components: {
-    'dashboard-page': Dashboard,
-  },
-  methods: {
-    click() {
-      alert('Helo')
-    }
-  },
 }
 </script>
 
