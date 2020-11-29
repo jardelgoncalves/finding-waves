@@ -12,6 +12,7 @@
     "sass": "^1.27.0",
     "sass-loader": "^10.0.4",
     "vue": "^2.6.11",
+    "vue-router": "^3.4.9",
     "vue2-google-maps": "^0.10.7"
   },
   "devDependencies": {
