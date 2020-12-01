@@ -1,31 +1,29 @@
 <script>
 
 import {
-  AppLogo,
   Input,
   Button,
   Form,
   SelectButton,
-  Avatar,
   TimeSelection,
   ScrollHorizontal,
   BeachCard,
   Maps,
+  Navbar,
 } from '../components'
 
 export default {
   name: 'dashboard-page',
   components: {
-    'app-logo': AppLogo,
     'app-button': Button,
     'app-input': Input,
     'app-form': Form,
-    'app-avatar': Avatar,
     'app-select-button': SelectButton,
     'app-time-selection': TimeSelection,
     'app-scroll-horizontal': ScrollHorizontal,
     'app-beach-card': BeachCard,
     'app-maps': Maps,
+    'app-navbar': Navbar,
   },
   data() {
 
@@ -51,10 +49,11 @@ export default {
       const scroll = this.getCurrentScroll();
       const shink = 50;
       if (scroll > shink) {
-        this.$refs.header.classList.add('--shink');
+        this.$refs.header.$el.classList.add('--shink');
         return;
       }
-        this.$refs.header.classList.remove('--shink')
+
+      this.$refs.header.$el.classList.remove('--shink')
     })
   }
 }
@@ -62,14 +61,7 @@ export default {
 
 <template>
   <div class="dashboard-page">
-    <nav class="dashboard-page__header" ref="header">
-      <app-logo :height="49" :width="49" />
-      <div class="dashboard-page__header__avatar-container" >
-        <span class="dashboard-page__header__avatar-container__name">Jardel</span>
-        <app-avatar text="Jardel" />
-        <app-button  text="Log out" :width="90" :height="40" margin="left" :margin-size="8" />
-      </div>
-    </nav>
+    <app-navbar ref="header" />
     <section class="dashboard-page__add-beach">
       <div class="dashboard-page__add-beach__content">
         <h3 class="dashboard-page__add-beach__content__title">Add new beach</h3>
@@ -173,42 +165,6 @@ export default {
   width: 100vw;
   display: flex;
   position: relative;
-
-  &__header {
-    z-index: 999;
-    height: 70px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 30px;
-    position: relative;
-
-    transition: all 0.2s;
-
-    &.--shink {
-      background-color: var(--color-primary-opacity);
-      position: fixed;
-    }
-
-    &__avatar-container {
-      display: flex;
-      align-items: center;
-      position: relative;
-      cursor: pointer;
-
-      &__name {
-        font-size: 20px;
-        color: var(--color-primary);
-        font-weight: bold;
-        margin-right: 8px;
-      }
-
-      button {
-        font-size: 16px;
-      }
-    }
-  }
 
   &__add-beach {
     max-width: 490px;
