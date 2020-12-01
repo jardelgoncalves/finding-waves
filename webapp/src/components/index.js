@@ -8,3 +8,4 @@ export * from './Icon';
 export * from './SelectButton';
 export * from './TimeSelection';
 export * from './Maps';
+export * from './Navbar';
