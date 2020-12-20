@@ -7,6 +7,7 @@ export default {
     'icon-star': Star,
   },
   props: {
+    id: { type: [String, Number], required: false },
     name: { type: String, required: true },
     rating: { type: Number, required: false, default: () => 1 },
     swell: { type: String, required: false },
@@ -15,6 +16,7 @@ export default {
     swellRotation:{ type: Number, required: false, default: () => 70 },
     waveRotation:{ type: Number, required: false, default: () => 70},
     windRotation:{ type: Number, required: false, default: () => 0},
+    selected:{ type: Boolean, required: false, default: () => false},
   },
   methods: {
     styleRating(current) {
@@ -24,7 +26,7 @@ export default {
 }
 </script>
 <template>
-  <div class="beach-card" @click="$emit('click')">
+  <div class="beach-card" :class="`${selected && '--active'}`" @click="$emit('input', id)">
     <div class="beach-card__title">
       <span class="beach-card__title__beach">Beach</span>
       <span class="beach-card__title__name">{{ name }}</span>
@@ -74,6 +76,10 @@ export default {
   padding: 16px;
   user-select: none;
   margin: 12px;
+
+  &.--active {
+    border: 2px solid var(--color-primary);
+  }
 
   &:hover {
     cursor: pointer;
