@@ -1,4 +1,6 @@
 <script>
+import { mapGetters, mapActions }  from 'vuex'
+
 import { AppLogo, Input, Button, Form } from '../components'
 export default {
   name: 'login-page',
@@ -8,11 +10,21 @@ export default {
     'app-form': Form,
     'app-logo': AppLogo,
   },
+  computed: {
+    ...mapGetters('auth', ['isLogged'])
+  },
   methods: {
-    onSubmit(e) {
-      console.log('Event: ', e)
+    ...mapActions('auth', ['login']),
+    async onSubmit(e) {
+      await this.login(e)
     }
   },
+
+  created() {
+    if(this.isLogged) {
+      this.$router.push({ path: '/' })
+    }
+  }
 }
 </script>
 
