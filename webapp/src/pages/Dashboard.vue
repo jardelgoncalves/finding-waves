@@ -1,5 +1,5 @@
 <script>
-
+import { mapGetters, mapActions }  from 'vuex'
 import {
   Input,
   Button,
@@ -34,17 +34,24 @@ export default {
         { label: 'E', value: 'E' },
         { label: 'W', value: 'W' },
       ],
-      selected: null,
+      selected: "1",
       timeSelected: null,
     }
   },
+  computed: {
+    ...mapGetters('auth', ['isLoading'])
+  },
   methods: {
+    ...mapActions('auth', [
+      'fetchUser'
+    ]),
     onSubmit() {},
     getCurrentScroll() {
       return this.$refs.listBeaches.pageYOffset || this.$refs.listBeaches.scrollTop
     }
   },
   mounted() {
+    this.fetchUser()
     this.$refs.listBeaches.addEventListener('scroll', () => {
       const scroll = this.getCurrentScroll();
       const shink = 50;
@@ -127,35 +134,51 @@ export default {
         </div>
         <app-scroll-horizontal>
           <app-beach-card
+            id="1"
             name="Manly"
             swell="0.71m 9.41s"
             wave="1.21m"
+            :selected="selected === '1'"
+            v-model="selected"
           />
           <app-beach-card
+            id="2"
             name="Manly"
             swell="0.71m 9.41s"
             wave="1.21m"
+            :selected="selected === '2'"
+            v-model="selected"
           />
           <app-beach-card
+            id="3"
             name="Manly"
             swell="0.71m 9.41s"
             wave="1.21m"
+            :selected="selected === '3'"
+            v-model="selected"
           />
           <app-beach-card
+            id="4"
             name="Manly"
             swell="0.71m 9.41s"
             wave="1.21m"
+            :selected="selected === '4'"
+            v-model="selected"
           />
           <app-beach-card
+            id="5"
             name="Manly"
             swell="0.71m 9.41s"
             wave="1.21m"
+            :selected="selected === '5'"
+            v-model="selected"
+
           />
         </app-scroll-horizontal>
         <app-maps />
       </div>
     </section>
-    
+
   </div>
 </template>
 
@@ -212,7 +235,7 @@ export default {
     width: calc(100% - 435px);
     max-height: 100vh;
     border-top-left-radius: 60px;
-    border-bottom-left-radius: 60px;    
+    border-bottom-left-radius: 60px;
 
     &__content {
       min-height: 100vh;
