@@ -2,12 +2,14 @@ import Vue from 'vue'
 import Axios from 'axios'
 import Vuex from 'vuex'
 import * as VueGoogleMaps from "vue2-google-maps"
+import Notifications from 'vue-notification'
 import App from './App.vue'
 import router from './router'
 import store from './store'
 import { TOKEN } from'./utils/constants'
 
 Vue.use(Vuex)
+Vue.use(Notifications)
 
 Vue.use(VueGoogleMaps, {
   load: {
