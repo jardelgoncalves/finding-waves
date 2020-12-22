@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <notifications />
     <router-view />
   </div>
 </template>
@@ -40,5 +41,25 @@ select,
 button,
 a {
   font-family: 'Nunito', sans-serif;
+}
+.link-container {
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  margin-top: 16px;
+
+  a {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--color-secondary);
+    font-weight: 900;
+    margin-left: 8px;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 }
 </style>>
