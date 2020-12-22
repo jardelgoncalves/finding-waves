@@ -1,4 +1,5 @@
 <script>
+import {mapGetters, mapActions} from 'vuex';
 import { AppLogo, Input, Button, Form } from '../components'
 export default {
   name: 'register-page',
@@ -8,9 +9,13 @@ export default {
     'app-input': Input,
     'app-logo': AppLogo,
   },
+  computed: {
+    ...mapGetters('auth', ['isLoading'])
+  },
   methods: {
-    onSubmit(data) {
-      console.log(data)
+    ...mapActions('auth', ['register']),
+    async onSubmit(data) {
+      await this.register(data);
     }
   },
 }
@@ -45,7 +50,15 @@ export default {
           block text="Create account"
           margin="top bottom"
           :margin-size="24"
+          :loading="isLoading"
         />
+
+        <div class="link-container">
+          You already have an account?
+          <router-link to="/login">
+            Sign in to your account
+          </router-link>
+        </div>
       </app-form>
     </div>
   </div>
