@@ -11,7 +11,7 @@ export default {
     'app-logo': AppLogo,
   },
   computed: {
-    ...mapGetters('auth', ['isLogged'])
+    ...mapGetters('auth', ['isLoggedIn', 'isLoading'])
   },
   methods: {
     ...mapActions('auth', ['login']),
@@ -21,7 +21,7 @@ export default {
   },
 
   created() {
-    if(this.isLogged) {
+    if(this.isLoggedIn) {
       this.$router.push({ path: '/' })
     }
   }
@@ -35,26 +35,35 @@ export default {
       <app-form @submit="onSubmit" @reset="() => {}">
         <app-input
           name="email"
-          placeholder="Informe seu email"
+          placeholder="Enter your email"
           type="email"
           margin="top"
           :margin-size="32"
         />
         <app-input
           name="password"
-          placeholder="Informe sua senha"
+          placeholder="Enter your password"
           type="password"
           margin="top bottom"
           :margin-size="16"
         />
         <app-button
+          :loading="isLoading"
           block
           type="submit"
           text="Login"
           margin="top bottom"
-          :margin-size="24"
+          :margin-size="4"
         />
+
+        <div class="link-container">
+          Don't have an account?
+          <router-link to="/register">
+            Create an account now
+          </router-link>
+        </div>
       </app-form>
+
     </div>
   </div>
 </template>
