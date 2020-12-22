@@ -2,7 +2,7 @@ export function isLoading(state) {
   return state.loading
 }
 
-export function isLogged(state) {
+export function isLoggedIn(state) {
   return !!Object.keys(state.user || {}).length
 }
 
