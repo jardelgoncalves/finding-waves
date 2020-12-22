@@ -80,7 +80,7 @@ export default {
 
   &__element {
     width: 100%;
-    height: 50px;
+    height: 56px;
     border: none;
     border-radius: 12px;
     padding: 0 12px;
