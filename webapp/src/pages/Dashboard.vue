@@ -1,5 +1,4 @@
 <script>
-import { mapGetters, mapActions }  from 'vuex'
 import {
   Input,
   Button,
@@ -38,30 +37,26 @@ export default {
       timeSelected: null,
     }
   },
-  computed: {
-    ...mapGetters('auth', ['isLoading'])
-  },
   methods: {
-    ...mapActions('auth', [
-      'fetchUser'
-    ]),
     onSubmit() {},
     getCurrentScroll() {
       return this.$refs.listBeaches.pageYOffset || this.$refs.listBeaches.scrollTop
+    },
+    scrollAnimation() {
+      this.$refs.listBeaches.addEventListener('scroll', () => {
+        const scroll = this.getCurrentScroll();
+        const shink = 50;
+        if (scroll > shink) {
+          this.$refs.header.$el.classList.add('--shink');
+          return;
+        }
+
+        this.$refs.header.$el.classList.remove('--shink')
+      })
     }
   },
   mounted() {
-    this.fetchUser()
-    this.$refs.listBeaches.addEventListener('scroll', () => {
-      const scroll = this.getCurrentScroll();
-      const shink = 50;
-      if (scroll > shink) {
-        this.$refs.header.$el.classList.add('--shink');
-        return;
-      }
-
-      this.$refs.header.$el.classList.remove('--shink')
-    })
+    this.scrollAnimation()
   }
 }
 </script>
