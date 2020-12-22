@@ -1,4 +1,6 @@
 <script>
+import { mapGetters, mapActions }  from 'vuex'
+
 import { AppLogo, Button, Avatar, } from '../'
   export default {
     name: 'app-navbar',
@@ -7,6 +9,15 @@ import { AppLogo, Button, Avatar, } from '../'
       'app-button': Button,
       'app-avatar': Avatar,
     },
+    computed: {
+      ...mapGetters('auth', ['isLoading', 'user'])
+    },
+    methods: {
+      ...mapActions('auth', ['fetchUser', 'logout'])
+    },
+    async created() {
+      await this.fetchUser()
+    }
   }
 </script>
 
@@ -14,9 +25,9 @@ import { AppLogo, Button, Avatar, } from '../'
   <nav class="navbar__header">
     <app-logo :height="49" :width="49" />
     <div class="navbar__header__avatar-container" >
-      <span class="navbar__header__avatar-container__name">Jardel</span>
-      <app-avatar text="Jardel" />
-      <app-button  text="Log out" :width="90" :height="40" margin="left" :margin-size="8" />
+      <span class="navbar__header__avatar-container__name">{{ user && user.name }}</span>
+      <app-avatar :text="user && user.name" />
+      <app-button  text="Log out" @click="logout" :width="90" :height="40" margin="left" :margin-size="8" />
     </div>
   </nav>
 </template>
