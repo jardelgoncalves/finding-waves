@@ -53,6 +53,19 @@ export class Rating {
     return 1;
   }
 
+  public getPositionFromLocation(coordinates: number): Position {
+    if (coordinates >= 310 || (coordinates < 50 && coordinates > 0))
+      return Position.N;
+
+    if (coordinates >= 50 && coordinates < 120) return Position.E;
+
+    if (coordinates >= 120 && coordinates < 220) return Position.S;
+
+    if (coordinates >= 220 && coordinates < 310) return Position.W;
+
+    return Position.E;
+  }
+
   private isWindsOffShore(
     wavePosition: Position,
     windPosition: Position
