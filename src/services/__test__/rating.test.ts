@@ -62,4 +62,26 @@ describe('Rating Service', () => {
       expect(rating).toBe(5);
     });
   });
+
+  describe('Get rating based on swell height', () => {
+    it('should get a rating of 1 for less than ankle to knee high swell', () => {
+      const rating = defaultRating.getRatingForSwellSize(0.2);
+      expect(rating).toBe(1);
+    });
+
+    it('should get a rating of 2 for an ankle to knee high swell', () => {
+      const rating = defaultRating.getRatingForSwellSize(0.6);
+      expect(rating).toBe(2);
+    });
+
+    it('should get a rating of 3 for waist high swell', () => {
+      const rating = defaultRating.getRatingForSwellSize(1.5);
+      expect(rating).toBe(3);
+    });
+
+    it('should get a rating of 5 for overhead swell', () => {
+      const rating = defaultRating.getRatingForSwellSize(2.5);
+      expect(rating).toBe(5);
+    });
+  });
 });
