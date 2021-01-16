@@ -1,4 +1,4 @@
-import { Beach, BeachPosition } from '@src/models/beach';
+import { Beach, Position } from '@src/models/beach';
 import nock from 'nock';
 import stormGlass3HoursFixture from '@test/fixtures/stormglass_weather_3_hours.json';
 import apiForecastResponse1BeachFixture from '@test/fixtures/api_forecast_response_1_beach.json';
@@ -10,7 +10,7 @@ describe('Beach forecast functional test', () => {
     lat: -33.792726,
     lng: 151.289824,
     name: 'Manly',
-    position: BeachPosition.E,
+    position: Position.E,
   };
   let token: string;
   const defaultUser = {
