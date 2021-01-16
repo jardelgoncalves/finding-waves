@@ -84,4 +84,31 @@ describe('Rating Service', () => {
       expect(rating).toBe(5);
     });
   });
+
+  describe('Get position based on points location', () => {
+    it('should get the point based on a east location', () => {
+      const position = defaultRating.getPositionFromLocation(92);
+      expect(position).toBe(Position.E);
+    });
+
+    it('should get the point based on a north location 1', () => {
+      const position = defaultRating.getPositionFromLocation(360);
+      expect(position).toBe(Position.N);
+    });
+
+    it('should get the point based on a north location 2', () => {
+      const position = defaultRating.getPositionFromLocation(40);
+      expect(position).toBe(Position.N);
+    });
+
+    it('should get the point based on a south location', () => {
+      const position = defaultRating.getPositionFromLocation(200);
+      expect(position).toBe(Position.S);
+    });
+
+    it('should get the point based on a west location', () => {
+      const position = defaultRating.getPositionFromLocation(300);
+      expect(position).toBe(Position.W);
+    });
+  });
 });
