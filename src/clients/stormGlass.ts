@@ -2,26 +2,26 @@ import { InternalError } from '@src/util/error/internal-error';
 import config, { IConfig } from 'config';
 import * as HTTPUtil from '@src/util/request';
 
-export interface ForecastPointSource {
+export interface StormGlassPointSource {
   [key: string]: number;
 }
 
-export interface ForecastPoint {
+export interface StormGlassPoint {
   readonly time: string;
-  readonly swellDirection: ForecastPointSource;
-  readonly swellHeight: ForecastPointSource;
-  readonly swellPeriod: ForecastPointSource;
-  readonly waveDirection: ForecastPointSource;
-  readonly waveHeight: ForecastPointSource;
-  readonly windDirection: ForecastPointSource;
-  readonly windSpeed: ForecastPointSource;
+  readonly swellDirection: StormGlassPointSource;
+  readonly swellHeight: StormGlassPointSource;
+  readonly swellPeriod: StormGlassPointSource;
+  readonly waveDirection: StormGlassPointSource;
+  readonly waveHeight: StormGlassPointSource;
+  readonly windDirection: StormGlassPointSource;
+  readonly windSpeed: StormGlassPointSource;
 }
 
 export interface StormGlassForecastResponse {
-  hours: ForecastPoint[];
+  hours: StormGlassPoint[];
 }
 
-export interface ForecastPointNormalized {
+export interface ForecastPoint {
   time: string;
   waveHeight: number;
   waveDirection: number;
@@ -59,10 +59,7 @@ export class StormGlass {
 
   constructor(protected request = new HTTPUtil.Request()) {}
 
-  public async fetchPoints(
-    lat: number,
-    lng: number
-  ): Promise<ForecastPointNormalized[]> {
+  public async fetchPoints(lat: number, lng: number): Promise<ForecastPoint[]> {
     try {
       const { data } = await this.request.get<StormGlassForecastResponse>(
         `${stormGlassResourceConfig.get(
@@ -91,7 +88,7 @@ export class StormGlass {
 
   private normalizeResponse(
     points: StormGlassForecastResponse
-  ): ForecastPointNormalized[] {
+  ): ForecastPoint[] {
     return points.hours.filter(this.isValidPoint.bind(this)).map((point) => ({
       time: point.time,
       swellDirection: point.swellDirection[this.stormGlassApiSource],
@@ -104,7 +101,7 @@ export class StormGlass {
     }));
   }
 
-  private isValidPoint(points: Partial<ForecastPoint>): boolean {
+  private isValidPoint(points: Partial<StormGlassPoint>): boolean {
     return !!(
       points.time &&
       points.swellDirection?.[this.stormGlassApiSource] &&
