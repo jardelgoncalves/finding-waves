@@ -2,23 +2,23 @@ import { InternalError } from '@src/util/error/internal-error';
 import config, { IConfig } from 'config';
 import * as HTTPUtil from '@src/util/request';
 
-export interface StormGlassPointSource {
+export interface ForecastPointSource {
   [key: string]: number;
 }
 
-export interface StormGlassPoint {
+export interface ForecastPoint {
   readonly time: string;
-  readonly swellDirection: StormGlassPointSource;
-  readonly swellHeight: StormGlassPointSource;
-  readonly swellPeriod: StormGlassPointSource;
-  readonly waveDirection: StormGlassPointSource;
-  readonly waveHeight: StormGlassPointSource;
-  readonly windDirection: StormGlassPointSource;
-  readonly windSpeed: StormGlassPointSource;
+  readonly swellDirection: ForecastPointSource;
+  readonly swellHeight: ForecastPointSource;
+  readonly swellPeriod: ForecastPointSource;
+  readonly waveDirection: ForecastPointSource;
+  readonly waveHeight: ForecastPointSource;
+  readonly windDirection: ForecastPointSource;
+  readonly windSpeed: ForecastPointSource;
 }
 
 export interface StormGlassForecastResponse {
-  hours: StormGlassPoint[];
+  hours: ForecastPoint[];
 }
 
 export interface ForecastPointNormalized {
@@ -104,7 +104,7 @@ export class StormGlass {
     }));
   }
 
-  private isValidPoint(points: Partial<StormGlassPoint>): boolean {
+  private isValidPoint(points: Partial<ForecastPoint>): boolean {
     return !!(
       points.time &&
       points.swellDirection?.[this.stormGlassApiSource] &&
