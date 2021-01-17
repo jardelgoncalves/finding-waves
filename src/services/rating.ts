@@ -1,4 +1,5 @@
-import { Beach, Position } from '@src/models/beach';
+import { Beach, GeoPosition } from '@src/models/beach';
+import { ForecastPoint } from '@src/clients/stormGlass';
 
 const waveHeights = {
   ankleToKnee: {
@@ -17,9 +18,25 @@ const waveHeights = {
 export class Rating {
   constructor(private beach: Beach) {}
 
+  public getRateForPoint(point: ForecastPoint): number {
+    const swellDirection = this.getPositionFromLocation(point.swellDirection);
+    const windDirection = this.getPositionFromLocation(point.windDirection);
+    const windAndWaveRating = this.getRatingBasedOnWindAndWavePosition(
+      swellDirection,
+      windDirection
+    );
+    const swellHeightRating = this.getRatingForSwellSize(point.swellHeight);
+    const swellPeriodRating = this.getRatingForSwellPeriod(point.swellPeriod);
+
+    const finalRating =
+      (windAndWaveRating + swellHeightRating + swellPeriodRating) / 3;
+
+    return Math.round(finalRating);
+  }
+
   public getRatingBasedOnWindAndWavePosition(
-    wavePosition: Position,
-    windPosition: Position
+    wavePosition: GeoPosition,
+    windPosition: GeoPosition
   ): number {
     if (wavePosition === windPosition) return 1;
     if (this.isWindsOffShore(wavePosition, windPosition)) return 5;
@@ -53,22 +70,22 @@ export class Rating {
     return 1;
   }
 
-  public getPositionFromLocation(coordinates: number): Position {
+  public getPositionFromLocation(coordinates: number): GeoPosition {
     if (coordinates >= 310 || (coordinates < 50 && coordinates > 0))
-      return Position.N;
+      return GeoPosition.N;
 
-    if (coordinates >= 50 && coordinates < 120) return Position.E;
+    if (coordinates >= 50 && coordinates < 120) return GeoPosition.E;
 
-    if (coordinates >= 120 && coordinates < 220) return Position.S;
+    if (coordinates >= 120 && coordinates < 220) return GeoPosition.S;
 
-    if (coordinates >= 220 && coordinates < 310) return Position.W;
+    if (coordinates >= 220 && coordinates < 310) return GeoPosition.W;
 
-    return Position.E;
+    return GeoPosition.E;
   }
 
   private isWindsOffShore(
-    wavePosition: Position,
-    windPosition: Position
+    wavePosition: GeoPosition,
+    windPosition: GeoPosition
   ): boolean {
     return (
       ('NESW'.indexOf(wavePosition) + 'NESW'.indexOf(windPosition)) % 2 === 0
