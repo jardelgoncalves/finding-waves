@@ -10,6 +10,7 @@ export interface Beach {
   _id?: string;
   name: string;
   position: GeoPosition;
+  rating?: number;
   lat: number;
   lng: number;
   user: string;
