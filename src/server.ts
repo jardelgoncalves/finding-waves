@@ -12,6 +12,7 @@ import * as database from './database';
 import { UsersController } from './controllers/users';
 import logger from './logger';
 import apiSwagger from '@src/api-schema.json';
+import { apiErrorValidator } from './middlewares/api-error-validator';
 
 export class SetupServer extends Server {
   constructor(private port = 3001) {
@@ -23,6 +24,11 @@ export class SetupServer extends Server {
     await this.setupDoc();
     this.setupControllers();
     await this.setupDatabase();
+    this.setupErrorHandlers();
+  }
+
+  private setupErrorHandlers(): void {
+    this.app.use(apiErrorValidator);
   }
 
   private async setupDoc(): Promise<void> {
