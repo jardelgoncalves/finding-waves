@@ -31,7 +31,7 @@ export abstract class BaseController {
     const duplicatedKinErrors = Object.values(error.errors).filter(
       (err) => err.kind === CUSTOM_VALIDATION.DUPLICATED
     );
-    let code = 422;
+    let code = 400;
     if (duplicatedKinErrors.length) code = 409;
 
     return { code, error: error.message };

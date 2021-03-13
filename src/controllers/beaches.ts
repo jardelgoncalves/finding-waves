@@ -8,7 +8,7 @@ import { BaseController } from '.';
 @ClassMiddleware(authMiddleware)
 export class BeachesController extends BaseController {
   @Post('')
-  public async creare(req: Request, res: Response): Promise<void> {
+  public async create(req: Request, res: Response): Promise<void> {
     try {
       const beach = new Beach({ ...req.body, ...{ user: req.decoded?.id } });
       const result = await beach.save();
@@ -17,7 +17,7 @@ export class BeachesController extends BaseController {
     } catch (error) {
       if (error instanceof mongoose.Error.ValidationError) {
         this.sendErrorResponse(res, {
-          code: 422,
+          code: 400,
           message: error.message,
         });
         return;
