@@ -1,14 +1,17 @@
 import './util/module-alias';
 import { Server } from '@overnightjs/core';
-import { Application } from 'express';
-import bodyParser from 'body-parser';
+import express, { Application } from 'express';
 import expressPinoLogger from 'express-pino-logger';
 import cors from 'cors';
+import swaggerUI from 'swagger-ui-express';
+import { OpenApiValidator } from 'express-openapi-validator';
+import { OpenAPIV3 } from 'express-openapi-validator/dist/framework/types';
 import { ForecastController } from './controllers/forecast';
 import { BeachesController } from './controllers/beaches';
 import * as database from './database';
 import { UsersController } from './controllers/users';
 import logger from './logger';
+import apiSwagger from '@src/api-schema.json';
 
 export class SetupServer extends Server {
   constructor(private port = 3001) {
@@ -17,12 +20,22 @@ export class SetupServer extends Server {
 
   public async init(): Promise<void> {
     this.setupExpress();
+    await this.setupDoc();
     this.setupControllers();
     await this.setupDatabase();
   }
 
+  private async setupDoc(): Promise<void> {
+    this.app.use('/docs', swaggerUI.serve, swaggerUI.setup(apiSwagger));
+    await new OpenApiValidator({
+      apiSpec: apiSwagger as OpenAPIV3.Document,
+      validateRequests: true,
+      validateResponses: true,
+    }).install(this.app);
+  }
+
   private setupExpress(): void {
-    this.app.use(bodyParser.json());
+    this.app.use(express.json());
     this.app.use(
       expressPinoLogger({
         logger,
