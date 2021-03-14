@@ -24,6 +24,9 @@
   ],
   "author": "Jardel Gonçalves",
   "license": "ISC",
+  "engines": {
+    "node": "12.x"
+  },
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/bcrypt": "^3.0.0",
