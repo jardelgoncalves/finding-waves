@@ -4,7 +4,7 @@
   "description": "Finding Waves is an application to calculate the best surf condition between different beaches",
   "main": "index.js",
   "scripts": {
-    "build": "etsc",
+    "build": "tsc",
     "start": "NODE_ENV=production && node dist/src/index.js",
     "start:dev": "ts-node-dev --transpile-only 'src/index.ts' | pino-pretty -c",
     "lint": "eslint ./src --ext .ts",
