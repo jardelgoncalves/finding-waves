@@ -1,4 +1,0 @@
-[build]
-  base = "webapp/"
-  publish = "dist/"
-  command = "CI= npm run build"
